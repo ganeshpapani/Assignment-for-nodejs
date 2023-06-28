@@ -30,7 +30,6 @@ const initializeDbAndServer = async () => {
 
 initializeDbAndServer();
 
-// API1  adding a customer
 
 // API2  finding subjects for each student
 app.get("/subjects", async (request, response) => {
