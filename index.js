@@ -98,6 +98,7 @@ const student = {
 };
 
 const detailsObject = { ...person, ...student };
+console.log(detailsObject)
 
 //5Promisified function for making a request to Google homepage
 const request = require("request");
