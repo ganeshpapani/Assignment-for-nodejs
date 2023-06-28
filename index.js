@@ -31,42 +31,9 @@ const initializeDbAndServer = async () => {
 initializeDbAndServer();
 
 // API1  adding a customer
-app.post("/api/add-customer", async (request, response) => {
-  try {
-    const { name, email } = request.body;
-
-    if (!name || !email) {
-      return response
-        .status(400)
-        .json({ error: "Name and email are required fields" });
-    }
-
-    const duplicateEmail = await query(
-      "SELECT * FROM customers WHERE email = ?",
-      email
-    );
-    if (duplicateEmail.length > 0) {
-      return response
-        .status(400)
-        .json({ error: "Customer with this email already exists" });
-    }
-
-    await query("INSERT INTO customers (name, email) VALUES (?, ?)", [
-      name,
-      email,
-    ]);
-
-    return response
-      .status(200)
-      .json({ message: "Customer added successfully" });
-  } catch (error) {
-    console.error(error);
-    return response.status(500).json({ error: "Internal server error" });
-  }
-});
 
 // API2  finding subjects for each student
-app.get("/api/subjects", async (request, response) => {
+app.get("/subjects", async (request, response) => {
   try {
     const queryResult = await query(`
       SELECT c.customerId, c.name, GROUP_CONCAT(s.subjectName ORDER BY s.subjectName SEPARATOR ',') AS subjects
